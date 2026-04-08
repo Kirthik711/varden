@@ -41,7 +41,6 @@ body {
   background-blend-mode: overlay;
   color: var(--text-main);
   line-height: 1.3;
-  overflow-x: hidden;
 }
 
 .logo {
@@ -769,4 +768,164 @@ body {
   font-weight: 1000;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+/* =========================================
+   CGPA & GRADES PANEL STYLES
+========================================= */
+
+.grade-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 1000;
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Premium Grade Colors */
+.grade-S {
+  background-color: #d4edda;
+  color: var(--success-green);
+  border-color: rgba(52, 168, 83, 0.3);
+}
+.grade-A {
+  background-color: #e8f0fe;
+  color: var(--primary-blue);
+  border-color: rgba(26, 115, 232, 0.3);
+}
+.grade-B {
+  background-color: #fef7e0;
+  color: var(--warning-yellow);
+  border-color: rgba(251, 188, 4, 0.3);
+}
+.grade-C {
+  background-color: #fce8e6;
+  color: var(--error-red);
+  border-color: rgba(234, 67, 53, 0.3);
+}
+.grade-D {
+  background-color: #f1f3f4;
+  color: var(--text-muted);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   PROFILE PANEL STYLES (NEO-BRUTALISM)
+========================================= */
+
+.profile-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.profile-col-left {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-col-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Card Container */
+.prof-card {
+  border: 3px solid #000;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 6px 6px 0px #000;
+  color: #000;
+}
+
+/* Background Colors */
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-lime {
+  background-color: #cddc39;
+}
+.bg-yellow {
+  background-color: #ffeb3b;
+}
+.bg-red {
+  background-color: #ff8a80;
+}
+.bg-cyan {
+  background-color: #84ffff;
+}
+.bg-purple {
+  background-color: #b388ff;
+}
+.bg-orange {
+  background-color: #ffb74d;
+}
+
+/* Internal Typography & Fields */
+.prof-header {
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.prof-field {
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px solid #000;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 8px;
+}
+
+.prof-field.inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-weight: 800;
+  font-size: 13px;
+  background: transparent;
+  margin-bottom: 0;
+}
+
+.prof-field label {
+  display: block;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.prof-field .val {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+  .profile-layout {
+    flex-direction: column;
+  }
+  .profile-col-left {
+    flex: none;
+    width: 100%;
+  }
+  .profile-col-right > div[style*="display: flex; gap: 24px;"] {
+    flex-direction: column;
+  }
 }

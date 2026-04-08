@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Varden | Portal</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..1000&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="custom-modal" class="modal-overlay">
+      <div class="modal-card">
+        <h3 id="modal-title" class="section-title">Title</h3>
+        <p id="modal-message" class="overall-label" style="margin-bottom: 24px">
+          Message
+        </p>
+        <div
+          id="modal-actions"
+          style="display: flex; gap: 16px; justify-content: center"
+        ></div>
+      </div>
+    </div>
+
+    <div id="account-card" class="account-card">
+      <div
+        class="account-card-content"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        "
+      >
+        <div
+          class="user-icon-circle"
+          style="
+            width: 80px;
+            height: 80px;
+            font-size: 32px;
+            margin-bottom: 16px;
+          "
+        >
+          <span id="card-user-symbol"></span>
+        </div>
+        <h3
+          id="card-user-name"
+          class="section-title"
+          style="margin-bottom: 4px; font-size: 18px"
+        ></h3>
+        <p
+          id="card-user-regno"
+          class="overall-label"
+          style="margin-bottom: 24px; font-weight: 1000"
+        ></p>
+        <button
+          class="submit-btn outline-btn"
+          onclick="promptLogout()"
+          style="width: 100%"
+        >
+          Sign Out
+        </button>
+      </div>
+    </div>
+
+    <header class="nav-container" id="main-nav" style="display: none">
+      <div class="header-left">
+        <div class="logo header-logo" onclick="goToHome()">VARDEN</div>
+        <div class="home-nav-icon" onclick="goToHome()" style="display: none">
+          <span class="material-symbols-outlined">home</span>
+        </div>
+      </div>
+
+      <nav class="menu-icons">
+        <div
+          class="menu-item"
+          id="nav-profile"
+          onclick="switchPanel('profile')"
+        >
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">badge</span>
+          </div>
+          <span class="menu-label">Profile</span>
+        </div>
+        <div class="menu-item" id="nav-cgpa" onclick="switchPanel('cgpa')">
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <span class="menu-label">Grades</span>
+        </div>
+        <div
+          class="menu-item"
+          id="nav-attendance"
+          onclick="switchPanel('attendance')"
+        >
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">analytics</span>
+          </div>
+          <span class="menu-label">Attendance</span>
+        </div>
+        <div
+          class="menu-item"
+          id="nav-calendar"
+          onclick="switchPanel('calendar')"
+        >
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+          <span class="menu-label">Calendar</span>
+        </div>
+        <div class="menu-item" id="nav-leave" onclick="switchPanel('leave')">
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">event_busy</span>
+          </div>
+          <span class="menu-label">Leave</span>
+        </div>
+      </nav>
+
+      <div class="header-right">
+        <div
+          class="user-nav-display"
+          onclick="toggleAccountCard()"
+          style="display: none"
+        >
+          <span id="nav-user-regno" class="nav-regno"></span>
+          <div class="user-icon-circle small">
+            <span id="nav-user-symbol"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="panel-home" class="panel">
+        <div class="home-center">
+          <div class="user-icon-circle large">
+            <span id="home-user-symbol"></span>
+          </div>
+          <h1
+            id="home-user-name"
+            class="section-title"
+            style="font-size: 48px; margin-bottom: 4px"
+          ></h1>
+          <p
+            id="home-user-regno"
+            class="overall-label"
+            style="font-size: 20px; margin-bottom: 48px; font-weight: 1000"
+          ></p>
+          <div class="home-list">
+            <div class="home-list-item" onclick="switchPanel('profile')">
+              <div class="icon-circle">
+                <span class="material-symbols-outlined">badge</span>
+              </div>
+              <h3>Student Profile</h3>
+            </div>
+            <div class="home-list-item" onclick="switchPanel('cgpa')">
+              <div class="icon-circle">
+                <span class="material-symbols-outlined">school</span>
+              </div>
+              <h3>Grades & CGPA</h3>
+            </div>
+            <div class="home-list-item" onclick="switchPanel('attendance')">
+              <div class="icon-circle">
+                <span class="material-symbols-outlined">analytics</span>
+              </div>
+              <h3>Attendance Summary</h3>
+            </div>
+            <div class="home-list-item" onclick="switchPanel('calendar')">
+              <div class="icon-circle">
+                <span class="material-symbols-outlined">calendar_month</span>
+              </div>
+              <h3>Academic Calendar</h3>
+            </div>
+            <div class="home-list-item" onclick="switchPanel('leave')">
+              <div class="icon-circle">
+                <span class="material-symbols-outlined">event_busy</span>
+              </div>
+              <h3>Leave Requests</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-profile" class="panel">
+        <div class="profile-layout">
+          <div class="profile-col-left">
+            <div
+              class="prof-card bg-white"
+              style="text-align: center; padding: 0; overflow: hidden"
+            >
+              <h2
+                style="
+                  font-size: 28px;
+                  font-weight: 900;
+                  margin: 20px 0;
+                  letter-spacing: -1px;
+                "
+              >
+                varden
+              </h2>
+              <div
+                style="
+                  width: 120px;
+                  height: 120px;
+                  border-radius: 12px;
+                  background: var(--surface-bg);
+                  margin: 0 auto 16px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 2px solid #000;
+                "
+              >
+                <span
+                  class="material-symbols-outlined"
+                  style="font-size: 64px; color: var(--text-muted)"
+                  >person</span
+                >
+              </div>
+              <h3
+                id="prof-name"
+                style="
+                  font-weight: 900;
+                  font-size: 20px;
+                  color: var(--primary-blue);
+                  margin-bottom: 4px;
+                "
+              ></h3>
+              <p
+                id="prof-regno"
+                style="font-weight: 800; font-size: 14px; margin-bottom: 24px"
+              ></p>
+              <div
+                style="
+                  background: #283593;
+                  color: white;
+                  padding: 12px;
+                  font-weight: 900;
+                  letter-spacing: 1px;
+                "
+              >
+                HOSTELLER
+              </div>
+            </div>
+
+            <div class="prof-card bg-lime">
+              <div class="prof-header">
+                <span class="material-symbols-outlined">school</span> ACADEMIC
+                DETAILS
+              </div>
+              <div class="prof-field">
+                <label>PROGRAM</label>
+                <div class="val">B.Tech Computer Science and Engineering</div>
+              </div>
+              <div class="prof-field">
+                <label>SCHOOL</label>
+                <div class="val">SCOPE</div>
+              </div>
+              <div class="prof-field">
+                <label>INSTITUTIONAL EMAIL</label>
+                <div
+                  class="val"
+                  id="prof-email"
+                  style="font-size: 12px; word-break: break-all"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-col-right">
+            <div class="prof-card bg-yellow">
+              <div class="prof-header">
+                <span class="material-symbols-outlined">assignment_ind</span>
+                PROCTOR PROFILE
+              </div>
+              <div style="display: flex; gap: 20px; align-items: center">
+                <div
+                  style="
+                    width: 80px;
+                    height: 80px;
+                    background: white;
+                    border: 2px solid #000;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    style="font-size: 40px"
+                    >person</span
+                  >
+                </div>
+                <div style="flex: 1">
+                  <h3
+                    style="
+                      font-weight: 900;
+                      font-size: 24px;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Dr. Alan Turing
+                  </h3>
+                  <p
+                    style="
+                      font-size: 12px;
+                      font-weight: 800;
+                      margin-bottom: 12px;
+                    "
+                  >
+                    Professor
+                  </p>
+                  <div style="display: flex; gap: 12px; flex-wrap: wrap">
+                    <div class="prof-field inline">
+                      <span
+                        class="material-symbols-outlined"
+                        style="font-size: 14px"
+                        >call</span
+                      >
+                      9876500000
+                    </div>
+                    <div class="prof-field inline">
+                      <span
+                        class="material-symbols-outlined"
+                        style="font-size: 14px"
+                        >location_on</span
+                      >
+                      SJT 410
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prof-card bg-red">
+              <div class="prof-header">
+                <span class="material-symbols-outlined">family_restroom</span>
+                GUARDIAN / FATHER
+              </div>
+              <div style="display: flex; gap: 16px; flex-wrap: wrap">
+                <div
+                  style="
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    min-width: 200px;
+                  "
+                >
+                  <div class="prof-field">
+                    <label>FULL NAME</label>
+                    <div class="val">Mr. Robert Doe</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>OCCUPATION</label>
+                    <div class="val">Software Architect</div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    min-width: 200px;
+                  "
+                >
+                  <div
+                    class="prof-field"
+                    style="flex: 1; display: flex; flex-direction: column"
+                  >
+                    <label>OFFICIAL ADDRESS</label>
+                    <div class="val" style="flex: 1">
+                      Bengaluru, Karnataka<br />India - 560038
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 24px; flex-wrap: wrap">
+              <div class="prof-card bg-cyan" style="flex: 1; min-width: 250px">
+                <div class="prof-header">
+                  <span class="material-symbols-outlined">person</span> PERSONAL
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <div class="prof-field">
+                    <label>DOB</label>
+                    <div class="val">15-Aug-2003</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>GENDER</label>
+                    <div class="val">Female</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>NATIVE STATE</label>
+                    <div class="val">Karnataka</div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="prof-card bg-purple"
+                style="flex: 1; min-width: 250px"
+              >
+                <div class="prof-header">
+                  <span class="material-symbols-outlined">history_edu</span>
+                  EDUCATION
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <div class="prof-field">
+                    <label>QUALIFICATION</label>
+                    <div class="val">12th Standard</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>BOARD</label>
+                    <div class="val">CBSE</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>PREVIOUS INSTITUTION</label>
+                    <div class="val" style="text-align: center">
+                      ABC Public School
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prof-card bg-orange">
+              <div class="prof-header">
+                <span class="material-symbols-outlined">apartment</span> HOSTEL
+                ALLOCATION
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 24px;
+                  align-items: stretch;
+                  flex-wrap: wrap;
+                "
+              >
+                <div
+                  style="
+                    background: black;
+                    color: white;
+                    border-radius: 12px;
+                    padding: 20px;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-width: 140px;
+                    flex: 1;
+                  "
+                >
+                  <span
+                    style="
+                      font-size: 10px;
+                      font-weight: 800;
+                      opacity: 0.8;
+                      letter-spacing: 1px;
+                    "
+                    >ROOM NO.</span
+                  >
+                  <span
+                    style="font-size: 48px; font-weight: 900; line-height: 1"
+                    >402</span
+                  >
+                  <span
+                    style="
+                      font-size: 10px;
+                      font-weight: 800;
+                      color: #ff9800;
+                      margin-top: 8px;
+                    "
+                    >Ladies Hostel - J Block</span
+                  >
+                </div>
+                <div
+                  style="
+                    flex: 2;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    justify-content: center;
+                    min-width: 200px;
+                  "
+                >
+                  <div class="prof-field">
+                    <label>BED TYPE</label>
+                    <div class="val">3 Bed AC</div>
+                  </div>
+                  <div class="prof-field">
+                    <label>MESS PLAN</label>
+                    <div class="val">Veg Mess</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-cgpa" class="panel">
+        <div class="summary-grid-3">
+          <div class="card-outline">
+            <span class="overall-label">Cumulative GPA</span>
+            <div
+              id="cgpa-overall"
+              class="overall-value"
+              style="color: var(--primary-blue)"
+            >
+              0.00
+            </div>
+          </div>
+          <div class="card-outline">
+            <span class="overall-label">Degree Target</span>
+            <div
+              id="cgpa-target"
+              class="overall-value"
+              style="font-size: 64px; color: var(--text-main)"
+            >
+              160
+            </div>
+          </div>
+          <div class="card-outline stat-fraction-card">
+            <span class="overall-label">Credits Completed</span>
+            <div
+              id="cgpa-fraction"
+              class="overall-value"
+              style="font-size: 56px"
+            >
+              0/0
+            </div>
+            <div class="missed-corner">
+              <span class="overall-label" style="margin-bottom: 0"
+                >Remaining: <span id="cgpa-remaining">0</span></span
+              >
+            </div>
+          </div>
+        </div>
+        <h2 class="section-title">Academic Record</h2>
+        <div
+          id="cgpa-list"
+          style="display: flex; flex-direction: column; gap: 16px"
+        ></div>
+      </section>
+
+      <section id="panel-attendance" class="panel">
+        <div id="attendance-main-view">
+          <div class="summary-grid-3">
+            <div class="card-outline">
+              <span class="overall-label">Current Attendance</span>
+              <div id="overall-percentage" class="overall-value">0%</div>
+            </div>
+            <div class="card-outline">
+              <span class="overall-label">Total Courses</span>
+              <div
+                id="total-courses"
+                class="overall-value"
+                style="font-size: 64px"
+              >
+                0
+              </div>
+            </div>
+            <div class="card-outline stat-fraction-card">
+              <span class="overall-label">Classes Attended</span>
+              <div
+                id="attendance-fraction"
+                class="overall-value"
+                style="font-size: 56px"
+              >
+                0/0
+              </div>
+              <div class="missed-corner">
+                <span class="overall-label" style="margin-bottom: 0"
+                  >Missed: <span id="total-missed">0</span></span
+                >
+              </div>
+            </div>
+          </div>
+          <h2 class="section-title">Course Breakdown</h2>
+          <div id="course-list"></div>
+        </div>
+        <div id="course-detail-view" style="display: none">
+          <button
+            class="logo header-logo visible"
+            onclick="closeCourseDetail()"
+            style="
+              margin-bottom: 32px;
+              border-radius: 20px;
+              font-size: 14px;
+              padding: 8px 20px;
+            "
+          >
+            <span class="material-symbols-outlined" style="font-size: 18px"
+              >arrow_back</span
+            >Back to List
+          </button>
+          <div id="course-detail-content"></div>
+        </div>
+      </section>
+
+      <section id="panel-calendar" class="panel">
+        <h2 class="section-title">Academic Calendar</h2>
+        <div class="calendar-legend">
+          <div class="legend-item"><span class="dot exam"></span> Exams</div>
+          <div class="legend-item">
+            <span class="dot special"></span> Special Occasions
+          </div>
+          <div class="legend-item">
+            <span class="dot instruction"></span> Instructional Days
+          </div>
+        </div>
+        <div id="calendar-grid-container" class="calendar-wrapper"></div>
+      </section>
+
+      <section id="panel-leave" class="panel">
+        <div id="eligibility-banner" class="leave-banner">
+          Checking Status...
+        </div>
+        <div class="leave-layout">
+          <div class="card-outline" style="flex: 1">
+            <h3 class="section-title">New Request</h3>
+            <form id="leave-form">
+              <div class="form-row-flex">
+                <div style="flex: 1">
+                  <label class="overall-label">From</label
+                  ><input
+                    type="datetime-local"
+                    id="req-from"
+                    class="form-input"
+                    required
+                  />
+                </div>
+                <div style="flex: 1">
+                  <label class="overall-label">To</label
+                  ><input
+                    type="datetime-local"
+                    id="req-to"
+                    class="form-input"
+                    required
+                  />
+                </div>
+              </div>
+              <div style="margin-bottom: 24px">
+                <label class="overall-label">Reason</label
+                ><textarea
+                  id="req-reason"
+                  rows="3"
+                  class="form-input"
+                  placeholder="REASON FOR ABSENCE"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-btn" style="width: 100%">
+                Submit Request
+              </button>
+            </form>
+          </div>
+          <div class="card-outline" style="flex: 1">
+            <h3 class="section-title">History</h3>
+            <div id="history-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
